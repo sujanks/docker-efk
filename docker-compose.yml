@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+
+  fluentd:
+    build: ./fluentd
+    volumes:
+      - /tmp/log:/tmp/log
+      - ./fluentd/conf:/fluentd/etc
+    links:
+      - "elasticsearch"
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    logging:
+        driver: "json-file"
+        options:
+            max-size: 100m
+            max-file: "5"
+
+  elasticsearch:
+    image: elasticsearch:7.6.2
+    environment:
+      - discovery.type=single-node
+    expose:
+      - 9200
+    ports:
+      - "9200:9200"
+
+  kibana:
+    image: kibana:7.6.2
+    links:
+      - "elasticsearch"
+    ports:
+      - "5601:5601"
+
