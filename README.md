@@ -3,7 +3,7 @@ Docker compose file for setting up a EFK service
 
 A basic docker compose file that will set up Elasticsearch, Fluentd, and Kibana.
 
-###Quick start
+### Quick start
 ```
     docker-compose up -d
 ```
@@ -24,7 +24,7 @@ Then, go to your browser and access `http://localhost:5601` (kibana). You should
 
 After you are done, just run:
 
-    docker-compose rm -f
+    docker-compose down
 
 And all services will be reclaimed.
 
